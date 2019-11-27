@@ -1,0 +1,300 @@
+{% load static %}	
+
+	{% load cart_template_tags %}
+	{% static "img" as baseUrl %}
+
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Education</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">							
+			<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">			
+			<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">			
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		</head>
+		<body>	
+		  <header id="header" id="home">
+	  		<div class="header-top">
+	  			<div class="container">
+			  		<div class="row">
+			  			<div class="col-lg-6 col-sm-6 col-8 header-top-left no-padding">
+			  				<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-behance"></i></a></li>
+								<li> <a href="/index"> Videos Online</a></li>
+			  				</ul>			
+			  			</div>
+			  			<div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
+						{% if user.is_authenticated %}
+							<ul>
+							<li style="color:white"> Hello, {{user.first_name}}  </li>
+							<a </a>
+							<a href="/account/logout">      Logout</a>
+							{% else %}					  
+							<a href="/account/register">Register2</a>
+							<a href="/account/login">Login</a>
+							{% endif %}
+							<a href="/account/my_account">My Account</a>
+			          		<a href="/account/news_account">News Account</a>
+							<span  style="color:white" > {{ request.user | cart_item_count }}  </span> 
+							<a href="{% url 'cart' %}"><img width="30" height="25" controls poster=""src="{% static 'img/cart.png'%} " " {{ request.user | cart_item_count }}" /></a>
+							</ul>
+			  			</div>
+			  		</div>			  					
+	  			</div>
+			</div>
+		    <div class="container main-menu">
+		    	<div class="row align-items-center justify-content-between d-flex">
+			      <div id="logo">
+
+			      </div>
+			      <nav id="nav-menu-container">
+			        <ul class="nav-menu">
+			          <li><a href="/index">Home1</a></li>
+			          <li><a href="/index">About</a></li>
+			          <li><a href="/account/buy_videos">Buy Videos</a></li>
+
+			          <li class="menu-has-children"><a href="">Pages</a>
+			            <ul>
+		              		<li><a href="course-details.html">Course Details</a></li>		
+		              		<li><a href="event-details.html">Event Details</a></li>		
+			                <li><a href="elements.html">Elements</a></li>
+					          <li class="menu-has-children"><a href="">Level 2 </a>
+					            <ul>
+					              <li><a href="#">Item One</a></li>
+					              <li><a href="#">Item Two</a></li>
+					            </ul>
+					          </li>					                		
+			            </ul>
+			          </li>					          					          		          
+			          <li><a href="contact.html">Contact</a></li>
+			        </ul>
+			      </nav><!-- #nav-menu-container -->		    		
+		    	</div>
+		    </div>
+		  </header><!-- #header -->
+
+			<!-- start banner Area -->
+			<section class="banner-area relative" id="home">
+				<div class="overlay overlay-bg"></div>	
+				<div class="container">
+					<div class="row fullscreen d-flex align-items-center justify-content-between">
+						<div class="banner-content col-lg-9 col-md-12">
+						<div class="container">
+						<div class="row justify-content-between align-items-center">
+						<div class="col-lg-6 col-md-6 search-course-left">
+
+              {% load crispy_forms_tags %}
+              {% block content %}
+                <form method="post" enctype="multipart/form-data">
+                	<h4 class="text-white pb-20 text-center mb-30">Upload book</h4>		
+                  {% csrf_token %}
+                  {{ form|crispy }}<br/>
+                  <button type="submit" class="btn btn-primary">Upload book cambiar forma para thumbnail</button>
+                </form>
+              {% endblock %}
+
+
+
+
+<!-- 
+						<form action="register" method="post">
+							{% csrf_token %}
+
+								<h4 class="text-white pb-20 text-center mb-30">Register</h4>		
+
+
+								<input type="text" class="form-control" name="first_name" placeholder="First Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" >
+								<input type="text" class="form-control" name="last_name" placeholder="Last Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Last Name'" >
+								<input type="text" class="form-control" name="username" placeholder="Username" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Username'" >
+								<input type="email" class="form-control" name="email" placeholder="Your Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Your Email Address'" >
+								<input type="password" class="form-control" name="password1" placeholder="Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Password'" >	
+						        <input type="password" class="form-control" name="password2" placeholder="Confirm Password" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Confirm Password'" ><br/>	
+	        					<h3>
+                                <input type="Submit">
+								</h3>
+						</form>
+
+-->
+						</div>
+						</div>
+						</div>
+    <div>
+    <br/>
+        {% for message in messages %}
+            <h4 style="color:white"> {{message}} </h4>
+        {% endfor %} 
+
+	</div>		
+	</h4>			
+
+
+						</div>										
+					</div>
+				</div>					
+			</section>
+			<!-- End banner Area -->
+
+
+			<!-- Start cta-two Area -->
+			<section class="cta-two-area">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 cta-left">
+
+						</div>
+						<div class="col-lg-4 cta-right">
+
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End cta-two Area -->
+						
+			<!-- start footer Area -->		
+			<footer class="footer-area section-gap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Top Products</h4>
+								<ul>
+									<li><a href="#">Managed Website</a></li>
+									<li><a href="#">Manage Reputation</a></li>
+									<li><a href="#">Power Tools</a></li>
+									<li><a href="#">Marketing Service</a></li>
+								</ul>								
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Quick links</h4>
+								<ul>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Brand Assets</a></li>
+									<li><a href="#">Investor Relations</a></li>
+									<li><a href="#">Terms of Service</a></li>
+								</ul>								
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Features</h4>
+								<ul>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Brand Assets</a></li>
+									<li><a href="#">Investor Relations</a></li>
+									<li><a href="#">Terms of Service</a></li>
+								</ul>								
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Resources</h4>
+								<ul>
+									<li><a href="#">Guides</a></li>
+									<li><a href="#">Research</a></li>
+									<li><a href="#">Experts</a></li>
+									<li><a href="#">Agencies</a></li>
+								</ul>								
+							</div>
+						</div>																		
+						<div class="col-lg-4  col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Newsletter</h4>
+								<p>Stay update with our latest</p>
+								<div class="" id="mc_embed_signup">
+									 <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get">
+									  <div class="input-group">
+									    <input type="text" class="form-control" name="EMAIL" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '" required="" type="email">
+									    <div class="input-group-btn">
+									      <button class="btn btn-default" type="submit">
+									        <span class="lnr lnr-arrow-right"></span>
+									      </button>    
+									    </div>
+									    	<div class="info"></div>  
+									  </div>
+									</form> 
+								</div>
+							</div>
+						</div>											
+					</div>
+					<div class="footer-bottom row align-items-center justify-content-between">
+						<p class="footer-text m-0 col-lg-6 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+						<div class="col-lg-6 col-sm-12 footer-social">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div>
+					</div>						
+				</div>
+			</footer>	
+			<!-- End footer Area -->	
+
+
+			<script src="{% static 'js/vendor/jquery-2.2.4.min.js' %}"></script>
+			<script src="{% static 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js' %}" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+			<script src="{% static 'js/vendor/bootstrap.min.js' %}"></script>			
+			<script src="{% static 'https://maps.googleapis.com/maps/api/js?key=AIzaSyBhOdIF3Y9382fqJYt5I_sswSrEw5eihAA' %}"></script>
+  			<script src="{% static 'js/easing.min.js' %}"></script>			
+			<script src="{% static 'js/hoverIntent.js' %}"></script>
+			<script src="{% static 'js/superfish.min.js' %}"></script>	
+			<script src="{% static 'js/jquery.ajaxchimp.min.js' %}"></script>
+			<script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>	
+    		<script src="{% static 'js/jquery.tabs.min.js' %}"></script>						
+			<script src="{% static 'js/jquery.nice-select.min.js' %}"></script>	
+			<script src="{% static 'js/owl.carousel.min.js' %}"></script>									
+			<script src="{% static 'js/mail-script.js' %}"></script>	
+			<script src="{% static 'js/main.js' %}"></script>	
+		</body>
+	</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

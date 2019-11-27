@@ -1,0 +1,369 @@
+{% load static %}	
+
+	{% load cart_template_tags %}
+	{% static "img" as baseUrl %}
+
+	<!DOCTYPE html>
+	<html lang="zxx" class="no-js">
+	<head>
+		<!-- Mobile Specific Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<!-- Favicon-->
+		<link rel="shortcut icon" href="img/fav.png">
+		<!-- Author Meta -->
+		<meta name="author" content="colorlib">
+		<!-- Meta Description -->
+		<meta name="description" content="">
+		<!-- Meta Keyword -->
+		<meta name="keywords" content="">
+		<!-- meta character set -->
+		<meta charset="UTF-8">
+		<!-- Site Title -->
+		<title>Education</title>
+
+		<link href="https://fonts.googleapis.com/css?family=Poppins:100,200,400,300,500,600,700" rel="stylesheet"> 
+			<!--
+			CSS
+			============================================= -->
+			<link rel="stylesheet" href="{% static 'css/linearicons.css' %}">
+			<link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/bootstrap.css' %}">
+			<link rel="stylesheet" href="{% static 'css/magnific-popup.css' %}">
+			<link rel="stylesheet" href="{% static 'css/nice-select.css' %}">							
+			<link rel="stylesheet" href="{% static 'css/animate.min.css' %}">
+			<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">			
+			<link rel="stylesheet" href="{% static 'css/jquery-ui.css' %}">			
+			<link rel="stylesheet" href="{% static 'css/main.css' %}">
+		</head>
+		<body>	
+		  <header id="header" id="home">
+	  		<div class="header-top">
+	  			<div class="container">
+			  		<div class="row">
+			  			<div class="col-lg-6 col-sm-6 col-8 header-top-left no-padding">
+			  				<ul>
+								<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+								<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+								<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+								<li><a href="#"><i class="fa fa-behance"></i></a></li>
+								<li><a href="/index">Home1</a></li>
+			  				</ul>			
+			  			</div>
+			  			<div class="col-lg-6 col-sm-6 col-4 header-top-right no-padding">
+						{% if user.is_authenticated %}
+							<ul>
+							<li style="color:white"> Hello, {{user.first_name}}  </li>
+							<a </a>
+							<a href="/account/logout">      Logout</a>
+							{% else %}					  
+							<a href="/account/registration">Register2</a>
+							<a href="/account/login">Login</a>
+							{% endif %}
+<!--						<a href="account/my_account">My Account</a>	-->	
+			          		<a href="account/news_account">My Account</a>
+							<span  style="color:white" > {{ request.user | cart_item_count }}  </span> 
+							<a href="{% url 'cart' %}"><img width="30" height="25" controls poster=""src="{% static 'img/cart2.png'%} " " {{ request.user | cart_item_count }}" /></a>
+							</ul>
+			  			</div>
+			  		</div>			  					
+	  			</div>
+			</div>
+
+		    <div class="container main-menu">
+		    	<div class="row align-items-center justify-content-between d-flex">
+			      <div id="logo">
+			        <a href="/index"><img src="" alt="" title="" /></a>
+			      </div>
+			      <nav id="nav-menu-container">
+			        <ul class="nav-menu">
+			          <li><a href="/index">Home1</a></li>
+			          <li><a href="/index">About</a></li>
+			          <li><a href="/account/buy_videos">Buy Videos</a></li>
+
+			          <li class="menu-has-children"><a href="">Pages</a>
+			            <ul>
+		              		<li><a href="course-details.html">Course Details</a></li>		
+		              		<li><a href="event-details.html">Event Details</a></li>		
+			                <li><a href="elements.html">Elements</a></li>
+					          <li class="menu-has-children"><a href="">Level 2 </a>
+					            <ul>
+					              <li><a href="#">Item One</a></li>
+					              <li><a href="#">Item Two</a></li>
+					            </ul>
+					          </li>					                		
+			            </ul>
+			          </li>					          					          		          
+			          <li><a href="contact.html">Contact</a></li>
+			        </ul>
+			      </nav><!-- #nav-menu-container -->		    		
+		    	</div>
+		    </div>
+		  </header><!-- #header -->
+			  
+			<!-- start banner Area -->
+			<section class="banner-area relative about-banner" id="home">	
+				<div class="overlay overlay-bg"></div>
+				<div class="container">				
+					<div class="row d-flex align-items-center justify-content-center">
+
+					</div>
+				</div>
+	
+			<!-- End banner Area -->	
+
+
+
+    <main role="main" class="container">
+      <br> </br>  <br> </br>
+<!--     <h4 style="color:black" >Filter Journals</h4>		--> 
+      <form method="GET" action="{% url 'BootstrapFilterView' %}">
+
+
+        <div class="form-row">
+          <div class="form-group col-md-3 col-lg-3">
+            <label style="color:white"  for="title_contains">Title contains...t</label>
+            <input class="form-control py-2 border-right-0 border" type="search" name="title_contains" placeholder="Title contains..." />            
+
+          </div>
+          <div class="form-group col-md-3 col-lg-3">
+            <label style="color:white"  for="title_or_author">Title or author...</label>
+            <input class="form-control py-2 border-right-0 border" type="search" id="title_or_author" name="title_or_author" placeholder="Title or author..." />            
+
+          </div>
+
+          <div class="form-group col-md-2 col-lg-2">
+            <label style="color:white"  style="color:white"  for="publishDateMax">Publish date maximum</label>
+            <input type="date" class="form-control" id="publishDateMax" name="date_max">
+          </div>
+          <div class="form-group col-md-4">
+            <label style="color:white" for="country">Country</label>
+            <select id="country" class="form-control" name="country">
+              <option selected>Choose...</option>
+              {% for country in countries %}
+              <option value="{{ country.code }}">{{ country }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+        
+        <div class="form-row">
+          <div class="form-group col-md-2 col-lg-2">
+            <label style="color:white" for="viewCountMin">Minimum View Count</label>
+            <input type="number" min=0 class="form-control" id="viewCountMin" placeholder="0" name="view_count_min">
+          </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label style="color:white"  for="viewCountMax">Maximum View Count</label>
+            <input type="number" min=0 class="form-control" id="viewCountMax" placeholder="10000?" name="view_count_max">
+          </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label style="color:white"  for="incidentDate">Incident_date</label>
+            <input type="date" class="form-control" id="incidentDate" name="incident_date">
+          </div>
+          <div class="form-group col-md-2 col-lg-2">
+            <label style="color:white"  for="publishDateMax">Incident date Up</label>
+            <input type="date" class="form-control" id="publishDateMax" name="incident_date_up">
+          </div>
+          <div class="form-group col-md-4">
+            <label style="color:white"  for="category">Category</label>
+            <select id="category" class="form-control" name="category">
+              <option selected>Choose...</option>
+              {% for cat in categories %}
+              <option value="{{ cat }}">{{ cat }}</option>
+              {% endfor %}
+            </select>
+          </div>
+        </div>
+ 
+        		</div>
+				</div>
+        			</section>
+		<div style="text-align: center; border: 1px solid">
+        <button  type="submit" class="btn btn-primary">Search</button>
+		</div>
+
+      </form>
+
+	
+
+			</section>
+			<!-- Start popular-courses Area --> 
+			<section class="popular-courses-area section-gap courses-page">
+				<div class="container">
+<!--				<div class="row d-flex justify-content-center">
+						<div class="menu-content pb-70 col-lg-8">
+							<div class="title text-center">
+								<h5 class="mb-10">Modify Video</h5>
+							</div>
+						</div>
+					</div>	-->						
+					<div class="row">
+
+						{% for profile in profiles %}
+						<div class="single-popular-carusel col-lg-6 col-md-6">
+							<div class="thumb-wrap relative">
+								<div class="thumb relative">
+									<div class="overlay overlay-bg"></div>	
+
+								</div>
+									
+							</div>
+							<div class="details">
+
+							</div>
+
+
+						<form  method="post"  action="{% url 'modify_account'  %}">
+							{% csrf_token %}
+							<br></br>
+							<p><label>Company Name :	<input type="text" class="form-control" name="company_name"   value={{profile.company_name  }} maxlength="100" onfocus="this.placeholder = ''" onblur="this.placeholder = 'First Name'" > </label></p>
+
+							<p><label>WEB :	<input type="text" class="form-control" name="web"   value={{profile.web }} maxlength="255"  > </label></p>
+							<p><label>Alt e-mail: {{profile.alt_email }}	<input type="email" class="form-control" name="alt_email"   value="""" maxlength="255"  > </label></p>
+
+             <p> <div class="form-group col-md-4">
+            <label style="color:black" >Country : {{ profile.country }}</label>
+            <select id="country" class="form-control" name="country">
+              <option selected>Choose...</option>
+              {% for country in countries %}
+              <option value="{{ country.code }}">{{ country }}</option>
+              {% endfor %}
+            </select>
+
+          </div> </p>
+
+             <p> <div class="form-group col-md-4">
+            <label style="color:black" >Media Type  : {{ profile.type_news }}</label>
+            <select id="type_newss" class="form-control" name="type_newss">
+              <option selected>Choose...</option>
+              {% for type_newss in type_news %}
+              <option value="{{ type_newss.id }}">{{ type_newss }}</option>
+              {% endfor %}
+            </select>
+
+ 
+        					<h3> <input type="Submit"> 	</h3>
+						</form>
+              {% endfor %}
+
+						</div>	
+ 											
+					</div>
+				</div>	
+			</section>
+			<!-- End popular-courses Area -->			
+
+
+    </main>
+
+			<!-- Start cta-two Area -->
+			<section class="cta-two-area">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-8 cta-left">
+							<h1>Not Yet Satisfied with our Trend?</h1>
+						</div>
+						<div class="col-lg-4 cta-right">
+							<a class="primary-btn wh" href="#">view our blog</a>
+						</div>
+					</div>
+				</div>	
+			</section>
+			<!-- End cta-two Area -->						    			
+
+			<!-- start footer Area -->		
+			<footer class="footer-area section-gap">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Top Products</h4>
+								<ul>
+									<li><a href="#">Managed Website</a></li>
+									<li><a href="#">Manage Reputation</a></li>
+									<li><a href="#">Power Tools</a></li>
+									<li><a href="#">Marketing Service</a></li>
+								</ul>								
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Quick links</h4>
+								<ul>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Brand Assets</a></li>
+									<li><a href="#">Investor Relations</a></li>
+									<li><a href="#">Terms of Service</a></li>
+								</ul>								
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Features</h4>
+								<ul>
+									<li><a href="#">Jobs</a></li>
+									<li><a href="#">Brand Assets</a></li>
+									<li><a href="#">Investor Relations</a></li>
+									<li><a href="#">Terms of Service</a></li>
+								</ul>								
+							</div>
+						</div>
+						<div class="col-lg-2 col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Resources</h4>
+								<ul>
+									<li><a href="#">Guides</a></li>
+									<li><a href="#">Research</a></li>
+									<li><a href="#">Experts</a></li>
+									<li><a href="#">Agencies</a></li>
+								</ul>								
+							</div>
+						</div>																		
+						<div class="col-lg-4  col-md-6 col-sm-6">
+							<div class="single-footer-widget">
+								<h4>Newsletter</h4>
+								<p>Stay update with our latest</p>
+								<div class="" id="mc_embed_signup">
+									 <form target="_blank" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get">
+									  <div class="input-group">
+									    <input type="text" class="form-control" name="EMAIL" placeholder="Enter Email Address" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter Email Address '" required="" type="email">
+									    <div class="input-group-btn">
+									      <button class="btn btn-default" type="submit">
+									        <span class="lnr lnr-arrow-right"></span>
+									      </button>    
+									    </div>
+									    	<div class="info"></div>  
+									  </div>
+									</form> 
+								</div>
+							</div>
+						</div>											
+					</div>
+					<div class="footer-bottom row align-items-center justify-content-between">
+						<p class="footer-text m-0 col-lg-6 col-md-12"><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
+						<div class="col-lg-6 col-sm-12 footer-social">
+							<a href="#"><i class="fa fa-facebook"></i></a>
+							<a href="#"><i class="fa fa-twitter"></i></a>
+							<a href="#"><i class="fa fa-dribbble"></i></a>
+							<a href="#"><i class="fa fa-behance"></i></a>
+						</div>
+					</div>						
+				</div>
+			</footer>	
+			<!-- End footer Area -->	
+
+
+
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+<!-- For infinte scrolling -->
+<script src="{% static 'js/jquery-3.4.1.min.js' %}"></script>
+<script src="{% static 'js/jquery.waypoints.min.js' %}"></script>
+<script src="{% static 'js/infinite.min.js' %}"></script>	
+
+</body>
+
+</html>

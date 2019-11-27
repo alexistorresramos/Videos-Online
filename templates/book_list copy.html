@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+  {% block content_header %}
+    <h2>Books</h2>
+    <p>
+      <a href="{% url 'upload_book' %}" class="btn btn-primary">Upload book</a>
+    </p>
+  {% endblock %}
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Download</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td>
+            {% if book.cover %}
+              <img src="{{ book.title  }}" alt="{{ book.desc }}" style="width:100px;">
+            {% else %}
+              <span class="text-muted">No cover</span>
+            {% endif %}
+          </td>
+          <td>{{ book.desc}}</td>
+          <td>{{ book.price }}</td>
+          <td>
+            <a href="{{ book.pdf.url }}" class="btn btn-primary btn-sm" target="_blank">
+              Download PDF
+            </a>
+            <video width="320" height="240" controls poster="">
+            <source src="{{ book.pdf.url }}" type="video/mp4">
+
+
+             Your browser does not support the video tag.
+            </video>
+          </td>
+          <td>
+            <form method="post" action="{% url 'delete_book' book.pk %}">
+              {% csrf_token %}
+              <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

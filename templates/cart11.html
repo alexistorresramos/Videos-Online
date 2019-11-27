@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load cart_template_tags %}
+{% block content %}
+
+
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+
+        <th style="color:black"> If you want to sell your video  </th>
+        <th style="color:black"> If you want to sell your video </th>
+        <th > </th>  
+        <th > </th> 
+        
+      </tr>
+    </thead>
+    <tbody>
+     
+       <tr>
+             <td colspan="1">
+ 
+            <a class='btn btn-primary float-right' href="/account/buy_videos">Continue shopping</a>
+            </td>
+        </tr>
+
+       <tr>
+             <td colspan="1">
+            <a class='btn btn-warning float-right ml-2' href='checkout'>Proceed to checkout</a>
+            <a class='btn btn-primary float-right' href="/account/buy_videos">Continue shopping</a>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+
+{% endblock %}
+

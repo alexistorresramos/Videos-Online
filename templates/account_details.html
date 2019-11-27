@@ -1,0 +1,53 @@
+{% extends 'base_general.html' %}
+
+{% load cart_template_tags %}
+{% block content %}
+
+  {% block content_header %}
+    <h2>My Account</h2>
+
+  {% endblock %}
+
+  <table class="table mb-0">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Category</th>
+        <th>Description</th>
+        <th>Transaction Date</th>
+        <th>Incident_date</th>
+        <th>Country</th> 
+        <th>Price</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      {% for book in books %}
+        <tr>
+          <td>{{ book.title}}</td>
+          <td>{{ book.category}}</td>
+          <td>{{ book.desc}}</td>
+          <td>{{ book.transacion_date}}</td>
+          <td>{{ book.incident_date}}</td>
+          <td>{{ book.country}}</td>
+          <td>${{ book.price }}</td>
+          <td>
+            
+          </td>
+
+        </tr>
+      {% endfor %}
+        <tr>
+            <td colspan="6"><b>Total Account</b></td>
+            <td><b>${{ request.user | total_account }}</b></td>
+        </tr>
+
+       <tr>
+            <td colspan="5">
+
+            <a class='btn btn-primary float-right' href="/index">Home</a>
+            </td>
+        </tr>
+    </tbody>
+  </table>
+{% endblock %}
