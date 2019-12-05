@@ -32,9 +32,9 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
   
 from django.db.models import Q, Count
-from rest_framework import generics
-from rest_framework.response import Response
-from .serializers import JournalSerializer
+#from rest_framework import generics
+#from rest_framework.response import Response
+#from .serializers import JournalSerializer
 
 # from django_countries.fields import CountryField
 #from django_countries.serializer_fields import CountryField
@@ -382,8 +382,13 @@ def home(request):
     return render(request,'home.html')
 
 def upload(request):
-    print('check')
+    print('checkggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg')
     context = {}
+
+    if request.user.is_authenticated:
+        print('uplod authenticated')
+    else:
+        return render(request,'login.html')     
     if request.method == 'POST':
         uploaded_file = request.FILES['document']
         fs = FileSystemStorage()
@@ -409,6 +414,11 @@ def book_list(request):
     })
 
 def cart(request):
+
+    if request.user.is_authenticated:
+        print('uplod authenticated')
+    else:
+        return render(request,'login.html')  
     books = Cart.objects.filter(news_station=request.user)
     return render(request, 'cart.html', {
         'books': books
@@ -421,6 +431,11 @@ def account_details(request):
     })
 
 def upload_book(request):
+
+    if request.user.is_authenticated:
+        print('uplod authenticated')
+    else:
+        return render(request,'login.html')     
     if request.method == 'POST':
         form = BookForm(request.POST, request.FILES)
         if form.is_valid():
@@ -971,16 +986,16 @@ def is_there_more_data(request):
 
 
 
-class ReactFilterView(generics.ListAPIView):
-    serializer_class = JournalSerializer
+#class ReactFilterView(generics.ListAPIView):
+#    serializer_class = JournalSerializer
 
-    def get_queryset(self):
-        videos = filter(self.request)
-        return videos
+#    def get_queryset(self):
+#        videos = filter(self.request)
+#        return videos
 
 
-class ReactInfiniteView(generics.ListAPIView):
-    serializer_class = JournalSerializer
+#class ReactInfiniteView(generics.ListAPIView):
+#    serializer_class = JournalSerializer
 
     def get_queryset(self):
         videos = infinite_filter(self.request)
